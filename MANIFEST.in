@@ -1,3 +1,7 @@
 include pyproject.toml
 include *.md
 include LICENSE
+recursive-include dist *.gz
+recursive-include dist *.whl
+recursive-include src *.Dockerfile
+recursive-include src *.pyc
