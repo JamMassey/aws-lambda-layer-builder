@@ -1,17 +1,72 @@
-## What's This?
+# Pylayerize
+Pylayerize simplifies the process of creating AWS Lambda Layers by leveraging Docker to compile and package Python dependencies for any targeted runtime. With support for custom packages and private GitHub repos, pylayerize optimizes the creation and deployment of Lambda Layers for improved development efficiency.
 
-This is a little package that will help you build a (currently only Python3.8) Lambda Layer out of any singular Python dependancy, ready for upload and deployment.
+### General Usage
+To use Pylayerize, you must first install it using pip:
+```ruby
+$ pip install pylayerize
+```
+Once pylayerize is installed, you can run it from the command line by invoking the pylayerize command.
+```ruby
+$ pylayerize -tp <target_package> [OPTIONS]
+```
 
-## Pre-requisites
+#### Required Options:
 
-Make sure you have Docker & Python installed! Run main as admin.
+-tp, --target-package: The target package to build a layer for.
 
-## What Hole Does it Fill?
-Python dependencies for Lambda Layers all dependencies have to be compiled on the target OS and using the target runtime. This can mean that creating/updating Lambda Layers can be a tedious and tricky process if working on an OS that isn't Linux.
+#### Optional Options:
 
-This package works by using Docker to create a container running Amazon Linux with Python on your targetted runtime, downloads the specified dependancies data into the container in an optimised structure expected by AWS Lambda, zips the file in the container, copies the .zip from the container to a specified location on your local machine, and removes the container when done. It supports any runtime, custom packages and even installing from links to private github repos - And you only have to use a single function to do all of it!
+-h, --help: Show the help message and exit.
+-op, --output-path: The output path for the layer .zip file. Default is the current directory (.).
+-n, --output-layer-name: The name of the output .zip file. Default is lambda_layer.
+-ll, --log-level: The log level of logging. Default is INFO.
+-gu, --git-username: The git username to use for the git clone.
+-gp, --git-password: The git password to use for the git clone.
+-rt, --runtime: The runtime to use for the layer. Default is python3.8.
+--console-log, --no-console-log: Log to console. Default is True.
+--local, --no-local: Set to True if you want to use a requirments.txt file or a custom lib stored locally. Default is False.
 
-## To Come
+#### Examples
+To build a layer for numpy using the default options, run:
 
-Experiment with Docker in Docker - Use a single container to manage the creation of a number of nested containers that each target a different specified runtime.
+```ruby
+$ pylayerize -tp my_package
+```
 
+To build a layer for numpy with a custom output path and layer name, run:
+
+```ruby
+$ pylayerize -tp numpy -op /path/to/output -n my_layer
+```
+
+To build a layer for private GitHub repositories that require authentication, run:
+```ruby
+$ pylayerize --target-package git+my_repo_link --git-username my_username --git-password my_password
+```
+
+If you have a local requirements.txt file at /path/to/requirements.txt, you can use it by running
+
+```ruby
+$ pylayerize --target-package mypackage --local --requirements-file /path/to/requirements.txt
+```
+
+#### Programatic Usage
+
+It is also possible to use pylayerize and its components programatically in Python.
+
+```python
+from pylayerize import build_aws_lamda_layer
+```
+
+
+### Contributions
+
+Contributions are welcome! Here are some guidelines for contributing to this project:
+
+Fork this repository and create a new branch for your feature or bug fix.
+Make your changes and commit them with descriptive commit messages.
+Create a pull request against the dev branch and describe your changes and the problem they solve.
+Ensure that your code passes all tests and meets the project's code standards.
+Respond to any feedback from maintainers and make any necessary changes.
+If you'd like to contribute but aren't sure where to start, take a look at the project's issue tracker. Issues marked as "help wanted" or "good first issue" are a good place to start.
