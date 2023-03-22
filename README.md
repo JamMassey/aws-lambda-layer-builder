@@ -17,15 +17,15 @@ $ pylayerize -tp <target_package> [OPTIONS]
 
 #### Optional Options:
 
--h, --help: Show the help message and exit.
--op, --output-path: The output path for the layer .zip file. Default is the current directory (.).
--n, --output-layer-name: The name of the output .zip file. Default is lambda_layer.
--ll, --log-level: The log level of logging. Default is INFO.
--gu, --git-username: The git username to use for the git clone.
--gp, --git-password: The git password to use for the git clone.
--rt, --runtime: The runtime to use for the layer. Default is python3.8.
---console-log, --no-console-log: Log to console. Default is True.
---local, --no-local: Set to True if you want to use a requirments.txt file or a custom lib stored locally. Default is False.
+1. -h, --help: Show the help message and exit.
+2. -op, --output-path: The output path for the layer .zip file. Default is the current directory (.).
+3. -n, --output-layer-name: The name of the output .zip file. Default is lambda_layer.
+4. -ll, --log-level: The log level of logging. Default is INFO.
+5. -gu, --git-username: The git username to use for the git clone.
+6. -gp, --git-password: The git password to use for the git clone.
+7. -rt, --runtime: The runtime to use for the layer. Default is python3.8.
+8. --console-log, --no-console-log: Log to console. Default is True.
+9. --local, --no-local: Set to True if you want to use a requirments.txt file or a custom lib stored locally. Default is False.
 
 #### Examples
 To build a layer for numpy using the default options, run:
