@@ -1,2 +1,0 @@
-[console_scripts]
-pylayerize = pylayerize.__main__:main
