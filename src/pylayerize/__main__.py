@@ -57,5 +57,6 @@ def main() -> None:
     else:
         git_auth = None
     build_aws_lamda_layer(package=args.target_package, output_path=args.output_path, output_layer_name=args.output_layer_name, local=args.local, git_auth=git_auth, runtime=args.runtime)
+    
 if __name__ == "__main__":
 	main()
