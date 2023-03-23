@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+src/__pycache__/
 
 # C extensions
 *.so
@@ -138,3 +139,5 @@ dmypy.json
 cython_debug/
 *.egg-info
 .installed.cfg
+
+dist
