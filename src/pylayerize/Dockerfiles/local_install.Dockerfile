@@ -1,6 +1,6 @@
 ARG RUNTIME
 
-FROM sam/build-${RUNTIME}
+FROM public.ecr.aws/sam/build-${RUNTIME}
 
 ARG RUNTIME
    
