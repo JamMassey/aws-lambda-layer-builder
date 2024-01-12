@@ -11,7 +11,6 @@ Once pylayerize is installed, you can run it from the command line by invoking t
 $ pylayerize -tp <target_package> [OPTIONS]
 ```
 
-
 #### Required Options:
 
 -tp, --target-package: The target package to build a layer for.

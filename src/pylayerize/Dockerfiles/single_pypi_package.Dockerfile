@@ -1,6 +1,6 @@
 ARG RUNTIME
 
-FROM amazon/aws-sam-cli-build-image-${RUNTIME}
+FROM public.ecr.aws/sam/build-${RUNTIME}
 
 ARG RUNTIME
 

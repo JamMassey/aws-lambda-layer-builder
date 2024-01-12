@@ -75,8 +75,6 @@ def main() -> None:
     logger.info("Logger initialised")
     if bool(args.git_username) != bool(args.git_password):
         raise ValueError("I attempting to authenticate for git you must provide both git username and password.")
-    if args.runtime not in ["python3.9", "python3.8", "python3.7", "python3.6"]:
-        raise ValueError("Runtime must be one of 3.8, 3.7 or 3.6")
     if args.git_username and args.git_password:
         git_auth = {"Username": args.git_username, "Password": args.git_password}
     else:
