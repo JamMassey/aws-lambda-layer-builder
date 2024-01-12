@@ -1,2 +1,3 @@
-__version__ = "1.0.1"
-from .__main__ import *
+from . import _version
+
+__version__ = _version.get_versions()["version"]
