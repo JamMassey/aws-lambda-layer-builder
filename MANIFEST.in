@@ -1,9 +1,13 @@
 include pyproject.toml
 include *.md
-include LICENSE
 include tox.ini
+include versioneer.py
+include src/pylayerize/_version.py
 recursive-include dist *.gz
 recursive-include dist *.whl
-recursive-include src *.Dockerfile
 recursive-include src *.pyc
 recursive-include tests *.py
+exclude *.pyo
+exclude __pycache__
+exclude .gitignore
+
