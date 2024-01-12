@@ -1,26 +1,37 @@
 name: Release
-
 on:
-  release:
-    types: [created]
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
 
 jobs:
-  deploy:
+  release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install setuptools wheel twine
-      - name: Build and publish
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          python setup.py sdist bdist_wheel
-          twine upload --repository pypi dist/*
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 
+
+    - name: Setup Git User
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+
+    - name: Get latest tag
+      id: get_tag
+      run: echo "::set-output name=tag::$(git tag | grep -v '\-rc$' | sort -r | head -n 1)"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      with:
+        tag_name: ${{ steps.get_tag.outputs.tag }}
+        release_name: Release ${{ steps.get_tag.outputs.tag }}
+        draft: false
